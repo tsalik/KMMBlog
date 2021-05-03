@@ -43,7 +43,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       
-      - name: Run tests
+      - name: Build and run tests
         if: matrix.job == 'test'
         run: |
           ./gradlew build
@@ -54,6 +54,18 @@ jobs:
         with:
           api-level: 29
           script: ./gradlew :androidApp:connectedAndroidTest
+
+      - name: iOS build setup
+        if: matrix.job == 'instrumentation'
+        run: |
+          xcodebuild build-for-testing -scheme ReaderEndToEndTests -project iosApp.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 12' #-allowProvisioningUpdates
+
+      - name: iOS test iPhone12
+        if: matrix.job == 'instrumentation'
+        run: |
+          run: xcodebuild test-without-building -scheme ReaderEndToEndTests -project iosApp.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 12'
+
+
           
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:MaxPermSize=4096m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
