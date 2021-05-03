@@ -25,7 +25,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ macOS-latest ]
+        os: [ macOS-latest, ubuntu-latest ]
         job: [ instrumentation, test ]
         xcode: ["12.4"]
         platform: ["iOS"]
@@ -51,26 +51,26 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.platform }}_derived_data-xcode_${{ matrix.xcode }}
       
       - name: Build and run tests
-        if: matrix.job == 'test'
+        if: matrix.job == 'test' && matrix.os == 'ubuntu-latest'
         run: |
           ./gradlew build
       
       - name: Run Android instrumentation test
-        if: matrix.job == 'instrumentation'
+        if: matrix.job == 'instrumentation' && matrix.os == 'ubuntu-latest'
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           script: ./gradlew :androidApp:connectedAndroidTest
 
       - name: iOS build setup
-        if: matrix.job == 'instrumentation'
+        if: matrix.job == 'instrumentation' && matrix.os == 'macOS-latest'
         run: |
           xcodebuild build-for-testing -scheme ReaderEndToEndTests -project iosApp/iosApp.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 12' #-allowProvisioningUpdates
 
       - name: iOS test iPhone12
-        if: matrix.job == 'instrumentation'
+        if: matrix.job == 'instrumentation' && matrix.os == 'macOS-latest'
         run: |
-          run: xcodebuild test-without-building -scheme ReaderEndToEndTests -project -derivedDataPath $GITHUB_WORKSPACE/Library/Developer/Xcode/DerivedData iosApp/iosApp.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 12'
+          run: xcodebuild test-without-building -scheme ReaderEndToEndTests -project -derivedDataPath DerivedData iosApp/iosApp.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 12'
 
 
           
