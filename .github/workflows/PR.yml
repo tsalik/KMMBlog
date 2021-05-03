@@ -63,7 +63,7 @@ jobs:
       - name: iOS test iPhone12
         if: matrix.job == 'instrumentation'
         run: |
-          run: xcodebuild test-without-building -scheme ReaderEndToEndTests -project iosApp/iosApp.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 12'
+          run: xcodebuild test-without-building -scheme ReaderEndToEndTests -derivedDataPath $GITHUB_WORKSPACE -project iosApp/iosApp.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 12'
 
 
           
