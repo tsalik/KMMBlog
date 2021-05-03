@@ -25,7 +25,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ macOS-latest, ubuntu-latest]
+        os: [ macOS-latest ]
         job: [ instrumentation, test ]
         
     runs-on: ${{matrix.os}}
@@ -44,13 +44,13 @@ jobs:
             ${{ runner.os }}-gradle-
       
       - name: Run tests
-        if: matrix.os == 'ubuntu-latest' && matrix.job == 'test'
+        if: matrix.job == 'test'
         run: |
           ./gradlew build
       
       - name: Run Android instrumentation test
-        if: matrix.os == 'ubuntu-latest' && matrix.job == 'instrumentation'
-        uses: ReactiveCircus/android-emulator-runner@v2.15.0
+        if: matrix.job == 'instrumentation'
+        uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           script: ./gradlew :androidApp:connectedAndroidTest
