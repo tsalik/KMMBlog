@@ -58,12 +58,12 @@ jobs:
       - name: iOS build setup
         if: matrix.job == 'instrumentation'
         run: |
-          xcodebuild build-for-testing -scheme ReaderEndToEndTests -project iosApp.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 12' #-allowProvisioningUpdates
+          xcodebuild build-for-testing -scheme ReaderEndToEndTests -project iosApp.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 12' #-allowProvisioningUpdates
 
       - name: iOS test iPhone12
         if: matrix.job == 'instrumentation'
         run: |
-          run: xcodebuild test-without-building -scheme ReaderEndToEndTests -project iosApp.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 12'
+          run: xcodebuild test-without-building -scheme ReaderEndToEndTests -project iosApp.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 12'
 
 
           
