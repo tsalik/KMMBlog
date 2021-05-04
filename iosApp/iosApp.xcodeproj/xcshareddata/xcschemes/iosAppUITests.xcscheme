@@ -23,9 +23,6 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "ReaderEndToEndTest">
-               </Test>
-               <Test
                   Identifier = "iosAppUITests">
                </Test>
             </SkippedTests>
