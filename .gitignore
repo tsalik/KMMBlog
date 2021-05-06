@@ -309,6 +309,7 @@ obj/
 .idea/dynamic.xml
 .idea/uiDesigner.xml
 .idea/jarRepositories.xml
+.idea/codeStyles/
 
 # OS-specific files
 .DS_Store?
