@@ -27,7 +27,7 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-core:1.5.4")
                 implementation("io.ktor:ktor-client-serialization:1.5.4")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3-native-mt")
             }
         }
         val commonTest by getting {
