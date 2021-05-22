@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private suspend fun loadPosts() {
         withContext(Dispatchers.Main) {
             val posts = blog.posts()
-            if (posts.isEmpty()) {
+            if (posts.data.isEmpty()) {
                 val tv: TextView = findViewById(R.id.text_view)
                 tv.setText(R.string.no_posts_yet)
             }

@@ -24,7 +24,11 @@ class FakeBlogServer {
 
     fun noPosts() {
         val response = MockResponse()
-        response.setBody("[]")
+        response.setBody("""
+            {
+              "data": []
+            }
+        """.trimIndent())
         response.setHeader("Content-Type", "application/json")
         mockWebServer.enqueue(response)
     }

@@ -6,3 +6,8 @@ import kotlinx.serialization.Serializable
 data class PostDescription(
     private val title: String
 )
+
+@Serializable
+data class PostResponse(
+    val data: List<PostDescription>
+)

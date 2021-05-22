@@ -7,7 +7,7 @@ internal expect val httpClient: HttpClient
 
 class BlogApi {
 
-    suspend fun posts(): List<PostDescription> {
+    suspend fun posts(): PostResponse {
         return httpClient.get("http://localhost:8080/posts/index.json")
     }
 
