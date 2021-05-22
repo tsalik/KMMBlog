@@ -5,16 +5,17 @@ struct ContentView: View {
     @State var greeting = Greeting().greeting()
     let greet = Greeting().greeting()
     
-    let blog: Void = BlogApi().posts { (postResponse: PostResponse?, error: Error?) in
-        if (postResponse != nil) {
-            print("not empty")
-        } else {
-            print("wut happened" + error!.localizedDescription)
-        }
-    }
-    
     var body: some View {
-        Text(greet)
+        let _: Void = BlogApi().posts { (postResponse: PostResponse?, error: Error?) in
+            if (postResponse != nil) {
+                greeting = "not empty"
+            } else {
+                greeting = "wut happened"
+                print(error?.localizedDescription ?? "")
+            }
+        }
+        
+        Text(greeting)
             .accessibilityIdentifier("greeting")
     }
 }
