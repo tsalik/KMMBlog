@@ -32,13 +32,20 @@ android {
     }
     buildTypes {
 
-        getByName("debug") {
+        val debug = getByName("debug") {
+            buildConfigField("String", "HOSTNAME", "\"http://localhost:8080/\"")
             addManifestPlaceholders(mapOf("clearText" to true))
         }
 
         getByName("release") {
+            buildConfigField("String", "HOSTNAME", "\"http://192.168.1.7:1313/\"")
             addManifestPlaceholders(mapOf("clearText" to false))
             isMinifyEnabled = false
+        }
+
+        create("dev") {
+            initWith(debug)
+            buildConfigField("String", "HOSTNAME", "\"http://192.168.1.7:1313/\"")
         }
     }
 

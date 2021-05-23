@@ -16,7 +16,7 @@ fun greet(): String {
 
 class MainActivity : AppCompatActivity() {
 
-    val blog = BlogApi()
+    val blog = BlogApi(BuildConfig.HOSTNAME)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

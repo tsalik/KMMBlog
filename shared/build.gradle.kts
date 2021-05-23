@@ -63,6 +63,14 @@ android {
         minSdkVersion(22)
         targetSdkVersion(30)
     }
+
+    buildTypes {
+        getByName("debug")
+
+        getByName("release")
+
+        create("dev")
+    }
 }
 
 val packForXcode by tasks.creating(Sync::class) {

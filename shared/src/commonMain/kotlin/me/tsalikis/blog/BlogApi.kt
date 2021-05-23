@@ -5,10 +5,10 @@ import io.ktor.client.request.get
 
 internal expect val httpClient: HttpClient
 
-class BlogApi {
+class BlogApi(private val hostname: String) {
 
     suspend fun posts(): PostResponse {
-        return httpClient.get("http://192.168.1.7:1313/posts/index.json")
+        return httpClient.get("${hostname}posts/index.json")
     }
 
 }
