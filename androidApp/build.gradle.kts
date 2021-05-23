@@ -15,7 +15,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test:core-ktx:1.3.0")
-
+    androidTestImplementation("org.awaitility:awaitility:4.1.0") {
+        exclude(group = "org.hamcrest")
+    }
     androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
 }
 

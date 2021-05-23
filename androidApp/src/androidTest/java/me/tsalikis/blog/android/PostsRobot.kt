@@ -6,7 +6,9 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import org.awaitility.Awaitility
 import org.hamcrest.core.AllOf
+import java.util.concurrent.TimeUnit
 
 class PostsRobot {
 
@@ -15,13 +17,14 @@ class PostsRobot {
     }
 
     fun showsNoPostsYet() {
-        Thread.sleep(2000) //todo: This is a quick workaround for the test to stabilize, investigate using IdlingResources or something
-        onView(withId(R.id.text_view)).check(matches(
-            AllOf.allOf(
-                isDisplayed(),
-                ViewMatchers.withText(R.string.no_posts_yet)
-            )
-        ))
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAsserted {
+            onView(withId(R.id.text_view)).check(matches(
+                AllOf.allOf(
+                    isDisplayed(),
+                    ViewMatchers.withText(R.string.no_posts_yet)
+                )
+            ))
+        }
     }
 
 }
