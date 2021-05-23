@@ -7,12 +7,21 @@
 //
 
 import XCTest
+import Embassy
+import EnvoyAmbassador
 
 class ReaderEndToEndTest: XCTestCase {
+    
+    private var eventLoop: EventLoop!
+    private var router: Router!
+    private var server: HTTPServer!
+    private var eventLoopThreadCondition: NSCondition!
+    private var eventLoopThread: Thread!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
+        setupWebServer()
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
@@ -21,17 +30,52 @@ class ReaderEndToEndTest: XCTestCase {
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        server.stopAndWait()
+        eventLoopThreadCondition.lock()
+        eventLoop.stop()
+        while eventLoop.running {
+            if !eventLoopThreadCondition.wait(until: Date().addingTimeInterval(10)) {
+                fatalError("Join eventLoopThread timeout")
+            }
+        }
     }
 
-    func test_shows_proper_greeting_for_ios() throws {
+    func test_shows_no_posts_yet_for_empty_blog() throws {
         // UI tests must launch the application that they test.
+        router["/posts/index.json"] = DelayResponse(JSONResponse(handler: { _ in
+            return [
+                "data" : []
+            ]
+        }), delay: .none)
+        
         let app = XCUIApplication()
         app.launch()
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        wait(for: [], timeout: 3.0)
         let greeting = app.staticTexts["greeting"]
-        XCTAssertTrue(greeting.label.contains("iOS"))
+        XCTAssertTrue(greeting.label.contains("No posts yet"))
     }
+    
+    private func setupWebServer() {
+        eventLoop = try! SelectorEventLoop(selector: try! KqueueSelector())
+        router = Router()
+        server = DefaultHTTPServer(eventLoop: eventLoop, port: 8080, app: router.app)
+        
+        try! server.start()
+        
+        eventLoopThreadCondition = NSCondition()
+        eventLoopThread = Thread(target: self, selector: #selector(runEventLoop), object: nil)
+        eventLoopThread.start()
+    }
+    
+    @objc private func runEventLoop() {
+        eventLoop.runForever()
+        eventLoopThreadCondition.lock()
+        eventLoopThreadCondition.signal()
+        eventLoopThreadCondition.unlock()
+      }
 
 }

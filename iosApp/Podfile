@@ -11,6 +11,7 @@ target 'iosApp' do
     # Pods for testing
 
     pod 'Embassy', '~> 4.1'
+    pod 'EnvoyAmbassador', '~> 4.0'
   end
 
 end
