@@ -6,17 +6,17 @@ struct ContentView: View {
     let greet = Greeting().greeting()
     
     var body: some View {
-        let _: Void = BlogApi().posts { (postResponse: PostResponse?, error: Error?) in
+        Text(greeting)
+            .accessibilityIdentifier("greeting")
+        
+        let _: Void = BlogApi(hostname: "http://192.168.1.7:1313/").posts { (postResponse: PostResponse?, error: Error?) in
             if (postResponse != nil) {
-                greeting = "not empty"
+                greeting = "No posts yet"
             } else {
                 greeting = "wut happened"
                 print(error?.localizedDescription ?? "")
             }
         }
-        
-        Text(greeting)
-            .accessibilityIdentifier("greeting")
     }
 }
 
