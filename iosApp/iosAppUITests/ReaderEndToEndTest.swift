@@ -42,7 +42,9 @@ class ReaderEndToEndTest: XCTestCase {
 
     func test_shows_no_posts_yet_for_empty_blog() throws {
         // UI tests must launch the application that they test.
+        let networkRequestExpectation = XCTestExpectation(description: "network call")
         router["/posts/index.json"] = DelayResponse(JSONResponse(handler: { _ in
+            networkRequestExpectation.fulfill()
             return [
                 "data" : []
             ]
@@ -54,9 +56,16 @@ class ReaderEndToEndTest: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        wait(for: [], timeout: 3.0)
-        let greeting = app.staticTexts["greeting"]
-        XCTAssertTrue(greeting.label.contains("No posts yet"))
+        wait(for: [networkRequestExpectation], timeout: 2.0)
+        
+    
+        let exists = NSPredicate(block: { any, _ in
+            let greeting = app.staticTexts["greeting"]
+            return greeting.label.contains("No posts yet")
+        })
+        expectation(for: exists, evaluatedWith: app, handler: .none)
+        
+        waitForExpectations(timeout: 2, handler: .none)
     }
     
     private func setupWebServer() {
