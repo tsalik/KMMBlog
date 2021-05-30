@@ -51,6 +51,7 @@ class ReaderEndToEndTest: XCTestCase {
         }), delay: .none)
         
         let app = XCUIApplication()
+        app.launchEnvironment = ["host":"http://localhost:8080/"]
         app.launch()
 
         // Use recording to get started writing UI tests.
