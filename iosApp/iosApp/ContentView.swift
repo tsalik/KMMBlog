@@ -10,8 +10,9 @@ struct ContentView: View {
             .accessibilityIdentifier("greeting")
         
         let url = Constants.hostname()
-        let _: Void = BlogApi(hostname: url).posts { (postResponse: PostResponse?, error: Error?) in
-            if (postResponse != nil) {
+        let catalogPosts = CatalogPosts(repository: BlogApi(hostname: url))
+        let _: Void = catalogPosts.byDescendingDate { (posts: [PostDescription]?, error: Error?) in
+            if (posts != nil) {
                 greeting = "No posts yet"
             } else {
                 greeting = "wut happened"
