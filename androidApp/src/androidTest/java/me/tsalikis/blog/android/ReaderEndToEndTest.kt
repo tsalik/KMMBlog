@@ -10,19 +10,19 @@ import org.junit.runner.RunWith
 class ReaderEndToEndTest {
 
     private val blog = FakeBlogServer()
-    private val postsRobot = PostsRobot()
+    private val blogReader = PostsRobot()
 
     @Test
     fun shows_no_posts_yet_for_empty_blog() {
         blog.start()
 
-        postsRobot.requestAllPosts()
+        blogReader.browsePosts()
 
         blog.hasReceivedAllPostsRequest()
 
         blog.noPosts()
 
-        postsRobot.showsNoPostsYet()
+        blogReader.showsNoPostsYet()
     }
 
     @After

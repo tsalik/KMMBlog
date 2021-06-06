@@ -8,6 +8,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.tsalikis.blog.BlogApi
+import me.tsalikis.blog.BlogRepository
 import me.tsalikis.blog.Greeting
 
 fun greet(): String {
@@ -16,7 +17,7 @@ fun greet(): String {
 
 class MainActivity : AppCompatActivity() {
 
-    val blog = BlogApi(BuildConfig.HOSTNAME)
+    val blog: BlogRepository = BlogApi(BuildConfig.HOSTNAME)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     private suspend fun loadPosts() {
         withContext(Dispatchers.Main) {
-            val posts = blog.posts()
-            if (posts.data.isEmpty()) {
+            val posts = blog.catalogByDescendingDate()
+            if (posts.isEmpty()) {
                 val tv: TextView = findViewById(R.id.text_view)
                 tv.setText(R.string.no_posts_yet)
             }

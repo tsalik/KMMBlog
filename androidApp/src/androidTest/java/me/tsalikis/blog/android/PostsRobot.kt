@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit
 
 class PostsRobot {
 
-    fun requestAllPosts() {
+    fun browsePosts() {
         launchActivity<MainActivity>()
     }
 

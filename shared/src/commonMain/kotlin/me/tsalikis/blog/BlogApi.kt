@@ -5,10 +5,11 @@ import io.ktor.client.request.get
 
 internal expect val httpClient: HttpClient
 
-class BlogApi(private val hostname: String) {
+class BlogApi(private val hostname: String) : BlogRepository {
 
-    suspend fun posts(): PostResponse {
-        return httpClient.get("${hostname}posts/index.json")
+    override suspend fun catalogByDescendingDate(): List<PostDescription> {
+        val postResponse = httpClient.get<PostResponse>("${hostname}posts/index.json")
+        return postResponse.data
     }
 
 }
