@@ -1,6 +1,6 @@
 # KMMBlog
 
-Android and iOS apps for my [personal blog](droidship.com) developed with Kotlin Multiplatform Mobile.
+Android and iOS apps for my [personal blog](https://tsalikis.blog/) developed with Kotlin Multiplatform Mobile.
 
 The project is under active development so there's [a number of pending todos](https://github.com/tsalik/KMMBlog/blob/trunk/todo.md) - one of them to set up CI.
 
