@@ -33,6 +33,24 @@ class FakeBlogServer {
         mockWebServer.enqueue(response)
     }
 
+    fun post(title: String, path: String, description: String, publishDate: String) {
+        val response = MockResponse()
+        response.setBody("""
+            {
+              "data": [
+                {
+                  "title": "$title",
+                  "path": "$path",
+                  "description": "$description",
+                  "publishDate": "$publishDate"
+                }
+              ]
+            }
+        """.trimIndent())
+        response.setHeader("Content-Type", "application/json")
+        mockWebServer.enqueue(response)
+    }
+
     fun stop() {
         mockWebServer.shutdown()
     }
