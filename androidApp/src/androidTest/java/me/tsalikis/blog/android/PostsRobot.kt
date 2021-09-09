@@ -27,4 +27,27 @@ class PostsRobot {
         }
     }
 
+    fun showsAPost(title: String, description: String, publishDate: String) {
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAsserted {
+            onView(withId(R.id.title)).check(matches(
+                AllOf.allOf(
+                    isDisplayed(),
+                    ViewMatchers.withText(title)
+                )
+            ))
+            onView(withId(R.id.description)).check(matches(
+                AllOf.allOf(
+                    isDisplayed(),
+                    ViewMatchers.withText(description)
+                )
+            ))
+            onView(withId(R.id.publishDate)).check(matches(
+                AllOf.allOf(
+                    isDisplayed(),
+                    ViewMatchers.withText(publishDate)
+                )
+            ))
+        }
+    }
+
 }

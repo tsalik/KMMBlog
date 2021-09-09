@@ -12,4 +12,9 @@ internal actual val httpClient: HttpClient = HttpClient(OkHttp) {
             prettyPrint = true
         })
     }
+    engine {
+        config {
+            retryOnConnectionFailure(true)
+        }
+    }
 }
