@@ -4,7 +4,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PostDescription(
-    private val title: String
+    val title: String,
+    private val path: String,
+    val description: String,
+    val publishDate: String
 )
 
 @Serializable
