@@ -12,7 +12,7 @@ struct ContentView: View {
         let url = Constants.hostname()
         let catalogPosts = CatalogPosts(repository: BlogApi(hostname: url))
         let _: Void = catalogPosts.byDescendingDate { (posts: [PostDescription]?, error: Error?) in
-            if (posts != nil) {
+            if (posts?.isEmpty != nil && posts!.isEmpty) {
                 greeting = "No posts yet"
             } else {
                 greeting = "wut happened"
