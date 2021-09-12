@@ -22,11 +22,11 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
     defaultConfig {
         applicationId = "me.tsalikis.blog.android"
-        minSdkVersion(22)
-        targetSdkVersion(30)
+        minSdk = 22
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
 

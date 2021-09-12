@@ -6,6 +6,34 @@ plugins {
     kotlin("plugin.serialization") version "1.4.32"
 }
 
+android {
+
+    configurations {
+        create("androidTestApi")
+        create("androidTestDebugApi")
+        create("androidTestReleaseApi")
+        create("testApi")
+        create("testDevApi")
+        create("testDebugApi")
+        create("testReleaseApi")
+    }
+
+    compileSdk = 30
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = 22
+        targetSdk = 30
+    }
+
+    buildTypes {
+        getByName("debug")
+
+        getByName("release")
+
+        create("dev")
+    }
+}
+
 kotlin {
     android()
 
@@ -53,23 +81,6 @@ kotlin {
             }
         }
         val iosTest by getting
-    }
-}
-
-android {
-    compileSdkVersion(30)
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdkVersion(22)
-        targetSdkVersion(30)
-    }
-
-    buildTypes {
-        getByName("debug")
-
-        getByName("release")
-
-        create("dev")
     }
 }
 
