@@ -13,6 +13,7 @@
 		7555FFB2242A642300829871 /* shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7555FFB1242A642300829871 /* shared.framework */; };
 		7555FFB3242A642300829871 /* shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7555FFB1242A642300829871 /* shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		82678BE999D53417506C045F /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20430B2C806752DEAC88372F /* Pods_iosApp.framework */; };
+		900EDD8226ECD5D700BF6A65 /* BlogEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900EDD8126ECD5D700BF6A65 /* BlogEntries.swift */; };
 		904A368E2663720300BA6B57 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A368D2663720300BA6B57 /* Constants.swift */; };
 		907D011F26414C6B007F71DB /* ReaderEndToEndTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907D011E26414C6B007F71DB /* ReaderEndToEndTest.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		7555FFB1242A642300829871 /* shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = shared.framework; path = "../shared/build/xcode-frameworks/shared.framework"; sourceTree = "<group>"; };
 		7AF9EBBD132174D109EF480B /* Pods-iosApp-iosAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp-iosAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-iosApp-iosAppUITests/Pods-iosApp-iosAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		82901EDB4067278E20B7630B /* Pods_iosApp_iosAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp_iosAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		900EDD8126ECD5D700BF6A65 /* BlogEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogEntries.swift; sourceTree = "<group>"; };
 		904A368D2663720300BA6B57 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		907D011C26414C6B007F71DB /* iosAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		907D011E26414C6B007F71DB /* ReaderEndToEndTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderEndToEndTest.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				904A368D2663720300BA6B57 /* Constants.swift */,
+				900EDD8126ECD5D700BF6A65 /* BlogEntries.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				904A368E2663720300BA6B57 /* Constants.swift in Sources */,
+				900EDD8226ECD5D700BF6A65 /* BlogEntries.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

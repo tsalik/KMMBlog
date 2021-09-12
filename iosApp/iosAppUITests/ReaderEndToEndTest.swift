@@ -66,7 +66,7 @@ class ReaderEndToEndTest: XCTestCase {
         })
         expectation(for: exists, evaluatedWith: app, handler: .none)
         
-        waitForExpectations(timeout: 2, handler: .none)
+        waitForExpectations(timeout: 4, handler: .none)
     }
     
     func test_shows_single_post_for_single_entry() throws {
@@ -92,15 +92,20 @@ class ReaderEndToEndTest: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         wait(for: [networkRequestExpectation], timeout: 2.0)
-        
     
-        let exists = NSPredicate(block: { any, _ in
-            let greeting = app.staticTexts["greeting"]
-            return greeting.label.contains("No posts yet")
+        let showsBlogPostList = NSPredicate(block: { any, _ in
+            let blogEntries = app.tables["blog_entries"]
+            let firstElement = blogEntries.cells.element(boundBy: 0)
+            let firstElementExists = blogEntries.exists && firstElement.exists
+            let textIsCorrect = firstElement.descendants(matching: .staticText)["title"].label.contains("Blogging with Hugo")
+            XCTAssertTrue(firstElementExists && textIsCorrect, "Couldn't find cell with title: \(firstElement.descendants(matching: .staticText)["title"])")
+            XCTAssertTrue(firstElement.descendants(matching: .staticText)["date"].label.contains("2018-01-14"), "Date not matching: \(firstElement.descendants(matching: .staticText)["date"])")
+            XCTAssertTrue(firstElement.descendants(matching: .staticText)["description"].label.contains("How I built and deployed this blog"), "Description not matching: \(firstElement.descendants(matching: .staticText)["description"])")
+            return firstElementExists && textIsCorrect
         })
-        expectation(for: exists, evaluatedWith: app, handler: .none)
+        expectation(for: showsBlogPostList, evaluatedWith: app, handler: .none)
         
-        waitForExpectations(timeout: 2, handler: .none)
+        waitForExpectations(timeout: 100.00, handler: .none)
     }
     
     private func setupWebServer() {

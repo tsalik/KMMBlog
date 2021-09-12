@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 val postDescription = posts[0]
 
                 title.text = postDescription.title
-                description.text = postDescription.description
+                description.text = postDescription.summary
                 publishDate.text = postDescription.publishDate
             }
         }
