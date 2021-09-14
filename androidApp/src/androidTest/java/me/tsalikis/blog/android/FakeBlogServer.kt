@@ -1,5 +1,6 @@
 package me.tsalikis.blog.android
 
+import me.tsalikis.blog.PostDescription
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert.assertEquals
@@ -33,17 +34,22 @@ class FakeBlogServer {
         mockWebServer.enqueue(response)
     }
 
-    fun post(title: String, path: String, description: String, publishDate: String) {
+    fun post(blogEntries: List<PostDescription>) {
         val response = MockResponse()
+        val postsJson = blogEntries.joinToString { post ->
+            """
+                {
+                  "title": "${post.title}",
+                  "path": "${post.path}",
+                  "description": "${post.summary}",
+                  "publishDate": "${post.publishDate}"
+                }
+            """.trimIndent()
+        }
         response.setBody("""
             {
               "data": [
-                {
-                  "title": "$title",
-                  "path": "$path",
-                  "description": "$description",
-                  "publishDate": "$publishDate"
-                }
+                $postsJson
               ]
             }
         """.trimIndent())

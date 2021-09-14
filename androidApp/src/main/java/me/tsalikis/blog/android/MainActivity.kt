@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -30,17 +31,10 @@ class MainActivity : AppCompatActivity() {
                 tv.setText(R.string.no_posts_yet)
             } else {
                 tv.visibility = View.GONE
-                val postsView = findViewById<View>(R.id.posts)
+                val postsView = findViewById<RecyclerView>(R.id.posts)
+                postsView.adapter = PostsAdapter(posts)
+
                 postsView.visibility = View.VISIBLE
-                val title = findViewById<TextView>(R.id.title)
-                val description = findViewById<TextView>(R.id.description)
-                val publishDate = findViewById<TextView>(R.id.publishDate)
-
-                val postDescription = posts[0]
-
-                title.text = postDescription.title
-                description.text = postDescription.summary
-                publishDate.text = postDescription.publishDate
             }
         }
     }
