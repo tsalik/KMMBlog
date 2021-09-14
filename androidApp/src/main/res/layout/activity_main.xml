@@ -17,9 +17,11 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Hello World!" />
 
-    <include
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/posts"
-        layout="@layout/row_post_entry"
-        android:visibility="gone" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layoutManager="LinearLayoutManager" />
 
 </FrameLayout>

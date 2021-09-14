@@ -47,7 +47,7 @@ android {
 
         create("dev") {
             initWith(debug)
-            buildConfigField("String", "HOSTNAME", "\"http://192.168.1.7:1313/\"")
+            buildConfigField("String", "HOSTNAME", "\"http://192.168.1.5:1313/\"")
         }
     }
 
