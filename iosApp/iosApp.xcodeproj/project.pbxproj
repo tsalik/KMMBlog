@@ -16,6 +16,7 @@
 		900EDD8226ECD5D700BF6A65 /* BlogEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900EDD8126ECD5D700BF6A65 /* BlogEntries.swift */; };
 		904A368E2663720300BA6B57 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A368D2663720300BA6B57 /* Constants.swift */; };
 		907D011F26414C6B007F71DB /* ReaderEndToEndTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907D011E26414C6B007F71DB /* ReaderEndToEndTest.swift */; };
+		90ED0B0227027675006EBFD1 /* PostsRobot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ED0B0127027675006EBFD1 /* PostsRobot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		907D011C26414C6B007F71DB /* iosAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		907D011E26414C6B007F71DB /* ReaderEndToEndTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderEndToEndTest.swift; sourceTree = "<group>"; };
 		907D012026414C6B007F71DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90ED0B0127027675006EBFD1 /* PostsRobot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsRobot.swift; sourceTree = "<group>"; };
 		91B753B0292EA66082759216 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		C20FF0A840A9895A2BAC05A4 /* Pods-iosApp-iosAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp-iosAppUITests.release.xcconfig"; path = "Target Support Files/Pods-iosApp-iosAppUITests/Pods-iosApp-iosAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +142,7 @@
 			children = (
 				907D011E26414C6B007F71DB /* ReaderEndToEndTest.swift */,
 				907D012026414C6B007F71DB /* Info.plist */,
+				90ED0B0127027675006EBFD1 /* PostsRobot.swift */,
 			);
 			path = iosAppUITests;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				907D011F26414C6B007F71DB /* ReaderEndToEndTest.swift in Sources */,
+				90ED0B0227027675006EBFD1 /* PostsRobot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,7 +2,7 @@
 - [x] Empty blog, show no posts written
 - [x] Add git hook for running checks before commit or merge
 - [x] Single post, show list with one post
-- [ ] Multiple posts, show list with all posts
+- [x] Multiple posts, show list with all posts
 - [ ] Refactor apps to call a Use Case and not the API data source directly
 - [ ] Single post, select it and show the article
 - [ ] Invalid post, show no post found
