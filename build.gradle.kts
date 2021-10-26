@@ -1,3 +1,13 @@
+import com.osacky.doctor.DoctorExtension
+
+plugins {
+    id("com.osacky.doctor") version "0.7.3"
+}
+
+configure<DoctorExtension> {
+    disallowCleanTaskDependencies.set(false)
+}
+
 buildscript {
     repositories {
         gradlePluginPortal()
