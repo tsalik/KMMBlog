@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -40,14 +42,15 @@ android {
         }
 
         getByName("release") {
-            buildConfigField("String", "HOSTNAME", "\"http://192.168.1.7:1313/\"")
+            buildConfigField("String", "HOSTNAME", "\"https://tsalikis.blog/\"")
             addManifestPlaceholders(mapOf("clearText" to false))
             isMinifyEnabled = false
         }
 
         create("dev") {
             initWith(debug)
-            buildConfigField("String", "HOSTNAME", "\"http://192.168.1.5:1313/\"")
+            val hostname = gradleLocalProperties(rootDir).getProperty("hostname")
+            buildConfigField("String", "HOSTNAME", hostname)
         }
     }
 
