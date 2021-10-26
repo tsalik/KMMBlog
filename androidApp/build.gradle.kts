@@ -50,7 +50,10 @@ android {
         create("dev") {
             initWith(debug)
             val hostname = gradleLocalProperties(rootDir).getProperty("hostname")
-            buildConfigField("String", "HOSTNAME", hostname)
+            val hostNameExistsInLocalProperties = hostname != null
+            if (hostNameExistsInLocalProperties) {
+                buildConfigField("String", "HOSTNAME", hostname)
+            }
         }
     }
 
