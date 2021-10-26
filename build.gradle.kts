@@ -2,6 +2,7 @@ import com.osacky.doctor.DoctorExtension
 
 plugins {
     id("com.osacky.doctor") version "0.7.3"
+    id("com.github.ben-manes.versions") version "0.39.0"
 }
 
 configure<DoctorExtension> {
