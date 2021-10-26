@@ -53,9 +53,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:1.5.4")
-                implementation("io.ktor:ktor-client-serialization:1.5.4")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3-native-mt")
+                implementation("io.ktor:ktor-client-core:1.6.4")
+                implementation("io.ktor:ktor-client-serialization:1.6.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt")
             }
         }
         val commonTest by getting {
@@ -66,7 +66,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-okhttp:1.5.4")
+                implementation("io.ktor:ktor-client-okhttp:1.6.4")
             }
         }
         val androidTest by getting {
@@ -77,7 +77,7 @@ kotlin {
         }
         val iosMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-ios:1.5.4")
+                implementation("io.ktor:ktor-client-ios:1.6.4")
             }
         }
         val iosTest by getting
