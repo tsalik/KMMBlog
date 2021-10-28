@@ -2,22 +2,24 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-    @State var greeting = Greeting().greeting()
     @State var loaded = false
     @State var postDescriptions: [PostDescription] = []
-    let greet = Greeting().greeting()
     
     var body: some View {
         ZStack {
-            Text(greeting)
-                .accessibilityIdentifier("greeting")
-            
+            if !loaded {
+                ProgressView()
+                    .accessibilityIdentifier("loading")
+            }
             if loaded && !postDescriptions.isEmpty {
                 ZStack {
                     BlogEntries(blogEntries: postDescriptions.map({ postDescription in
                         return BlogEntry(id: UUID(), postDescription: postDescription)
                     }))
                 }
+            } else if loaded && postDescriptions.isEmpty {
+                Text("No posts yet")
+                    .accessibilityIdentifier("noPostsMessage")
             }
             
         }.onAppear { loadPosts() }
@@ -29,11 +31,9 @@ struct ContentView: View {
         let catalogPosts = CatalogPosts(repository: BlogApi(hostname: url))
         let _: Void = catalogPosts.byDescendingDate { (posts: [PostDescription]?, error: Error?) in
             loaded = true
-            if (posts?.isEmpty != nil && posts!.isEmpty) {
-                greeting = "No posts yet"
-            } else {
-                greeting = "wut happened"
+            if posts != nil {
                 postDescriptions = posts!
+            } else if error != nil {
                 print(error?.localizedDescription ?? "")
             }
         }

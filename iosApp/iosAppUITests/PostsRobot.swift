@@ -11,31 +11,44 @@ import XCTest
 
 class PostsRobot {
     
-    private let app = XCUIApplication()
+    private let app: XCUIApplication
+    private let viewTimeout = 2.0
+    private let noPostsMessage: XCUIElement
+    private let progress: XCUIElement
+    private let blogEntries: XCUIElement
+    
+    init() {
+        app = XCUIApplication()
+        progress = app.activityIndicators["loading"]
+        noPostsMessage = app.staticTexts["noPostsMessage"]
+        blogEntries = app.tables["blog_entries"]
+    }
         
     func browsePosts() {
         app.launchEnvironment = ["host":"http://localhost:8080/"]
         app.launch()
     }
     
-    func greetingIsShowing() {
-        let greeting = app.staticTexts["greeting"]
-        XCTAssertTrue(greeting.waitForExistence(timeout: 2.0))
+    func loadingIsShowing() {
+        XCTAssertTrue(progress.exists)
+        XCTAssertFalse(noPostsMessage.exists)
     }
     
     func showsNoPostsYet() {
-        let greeting = app.staticTexts["greeting"]
-        XCTAssertEqual("No posts yet", greeting.label)
+        XCTAssertTrue(noPostsMessage.waitForExistence(timeout: viewTimeout))
+        XCTAssertFalse(progress.exists)
+        XCTAssertFalse(blogEntries.exists)
     }
     
     func showsPostEntryWith(title: String, date: String, description: String) {
-        let blogEntries = app.tables["blog_entries"]
-        XCTAssertTrue(blogEntries.waitForExistence(timeout: 2.0))
+        XCTAssertTrue(blogEntries.waitForExistence(timeout: viewTimeout))
         
         let firstElement = blogEntries.cells.element(boundBy: 0)
         XCTAssertEqual(title, firstElement.descendants(matching: .staticText)["title"].label)
         XCTAssertEqual(date, firstElement.descendants(matching: .staticText)["date"].label)
         XCTAssertEqual(description, firstElement.descendants(matching: .staticText)["description"].label)
+        XCTAssertFalse(progress.exists)
+        XCTAssertFalse(noPostsMessage.exists)
     }
     
 }

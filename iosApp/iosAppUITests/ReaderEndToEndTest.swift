@@ -58,7 +58,7 @@ class ReaderEndToEndTest: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         
-        postsRobot.greetingIsShowing()
+        postsRobot.loadingIsShowing()
         
         wait(for: [networkRequestExpectation], timeout: 2.0)
         
@@ -85,7 +85,7 @@ class ReaderEndToEndTest: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        postsRobot.greetingIsShowing()
+        postsRobot.loadingIsShowing()
         
         wait(for: [networkRequestExpectation], timeout: 2.0)
         
