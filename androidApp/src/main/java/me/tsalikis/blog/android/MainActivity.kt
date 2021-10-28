@@ -2,6 +2,7 @@ package me.tsalikis.blog.android
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -24,13 +25,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private suspend fun loadPosts() {
-        val tv = findViewById<TextView>(R.id.text_view)
+        val noPostsMessage = findViewById<TextView>(R.id.noPostsMessage)
+        val progressView = findViewById<ProgressBar>(R.id.progressView)
+        progressView.visibility = View.VISIBLE
         withContext(Dispatchers.Main) {
             val posts = catalogPosts.byDescendingDate()
+            progressView.visibility = View.GONE
             if (posts.isEmpty()) {
-                tv.setText(R.string.no_posts_yet)
+                noPostsMessage.visibility = View.VISIBLE
+                noPostsMessage.setText(R.string.no_posts_yet)
             } else {
-                tv.visibility = View.GONE
+                noPostsMessage.visibility = View.GONE
                 val postsView = findViewById<RecyclerView>(R.id.posts)
                 postsView.adapter = PostsAdapter(posts)
 

@@ -7,36 +7,40 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.test.espresso.matcher.ViewMatchers.*
-import org.awaitility.Awaitility
+import org.awaitility.Awaitility.await
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
 import java.util.concurrent.TimeUnit
 
+private const val timeout = 2L
+
 class PostsRobot {
 
     private val posts = onView(withId(R.id.posts))
+    private val progress = onView(withId(R.id.progressView))
+    private val noPostsMessage = onView(withId(R.id.noPostsMessage))
 
     fun browsePosts() {
         launchActivity<MainActivity>()
+        progress.check(isDisplayed)
+        posts.check(isGone)
+        noPostsMessage.check(isGone)
     }
 
     fun showsNoPostsYet() {
-        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAsserted {
-            onView(withId(R.id.text_view)).check(
-                matches(
-                    allOf(
-                        isDisplayed(),
-                        withText(R.string.no_posts_yet)
-                    )
-                )
-            )
+        await().atMost(timeout, TimeUnit.SECONDS).untilAsserted {
+            noPostsMessage.check(isDisplayed)
+            progress.check(isGone)
+            posts.check(isGone)
         }
     }
 
     fun showsPostAt(position: Int, title: String, description: String, publishDate: String) {
-        Awaitility.await().atMost(2, TimeUnit.SECONDS).untilAsserted {
+        await().atMost(timeout, TimeUnit.SECONDS).untilAsserted {
             posts.check(matches(atPosition(position, postWith(title, description, publishDate))))
+            progress.check(isGone)
+            noPostsMessage.check(isGone)
         }
     }
 
