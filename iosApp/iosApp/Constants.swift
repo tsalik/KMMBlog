@@ -10,7 +10,7 @@ import Foundation
 
 struct Constants {
     
-    private static let developmentHost = "http://192.168.1.7:1313/"
+    private static let developmentHost = "http://192.168.1.2:1313/"
     
     static func hostname() -> String {
         if ProcessInfo.processInfo.environment["host"] != nil {
