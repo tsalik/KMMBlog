@@ -47,10 +47,11 @@ class ReaderEndToEndTest: XCTestCase {
         let networkRequestExpectation = XCTestExpectation(description: "network call")
         router["/posts/index.json"] = DelayResponse(JSONResponse(handler: { _ in
             networkRequestExpectation.fulfill()
+            print("network call")
             return [
                 "data" : []
             ]
-        }), delay: .none)
+        }), delay: .delay(seconds: 2))
         
         postsRobot.browsePosts()
 
@@ -70,6 +71,7 @@ class ReaderEndToEndTest: XCTestCase {
         let networkRequestExpectation = XCTestExpectation(description: "network call")
         router["/posts/index.json"] = DelayResponse(JSONResponse(handler: { _ in
             networkRequestExpectation.fulfill()
+            print("network call")
             return [
                 "data" : [[
                     "title" : "Blogging with Hugo",
@@ -78,7 +80,7 @@ class ReaderEndToEndTest: XCTestCase {
                     "publishDate" : "2018-01-14"
                 ]]
             ]
-        }), delay: .none)
+        }), delay: .delay(seconds: 2))
         
         postsRobot.browsePosts()
 

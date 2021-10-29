@@ -12,7 +12,7 @@ import XCTest
 class PostsRobot {
     
     private let app: XCUIApplication
-    private let viewTimeout = 2.0
+    private let viewTimeout = 5.0
     private let noPostsMessage: XCUIElement
     private let progress: XCUIElement
     private let blogEntries: XCUIElement
@@ -30,17 +30,20 @@ class PostsRobot {
     }
     
     func loadingIsShowing() {
+        print("checking loading")
         XCTAssertTrue(progress.exists)
         XCTAssertFalse(noPostsMessage.exists)
     }
     
     func showsNoPostsYet() {
+        print("checking no posts")
         XCTAssertTrue(noPostsMessage.waitForExistence(timeout: viewTimeout))
         XCTAssertFalse(progress.exists)
         XCTAssertFalse(blogEntries.exists)
     }
     
     func showsPostEntryWith(title: String, date: String, description: String) {
+        print("checking for posts")
         XCTAssertTrue(blogEntries.waitForExistence(timeout: viewTimeout))
         
         let firstElement = blogEntries.cells.element(boundBy: 0)
